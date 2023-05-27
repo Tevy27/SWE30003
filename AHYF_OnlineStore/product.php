@@ -1,16 +1,16 @@
-<?php
+<?php 
+include 'dbConnect.php';
 
 // get product id from query string
 $productId = $_GET['id'];
-
+ 
 // fetch product details
-$sql = "SELECT * FROM products WHERE id = ?";
+$sql = "SELECT * FROM products WHERE id = 1";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $productId);
 $stmt->execute();
 $result = $stmt->get_result();
 $product = $result->fetch_assoc();
-
 ?>
 
 <!DOCTYPE html>

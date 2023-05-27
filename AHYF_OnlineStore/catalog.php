@@ -1,8 +1,8 @@
+<?php include 'dbConnect.php';?>
 <?php
-
-// fetch all products
-$sql = "SELECT * FROM products";
-$result = $conn->query($sql);
+    // fetch all products
+    $sql = "SELECT * FROM products";
+    $result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
