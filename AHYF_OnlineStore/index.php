@@ -34,21 +34,37 @@ error_reporting(E_ALL);
             $sql = "SELECT productId, name, price, image FROM products";
             $result = $conn->query($sql);
             
-            if ($result === FALSE) {
-                echo "Error: " . $conn->error;
-            } else {
-                $featuredProducts = [];
+            // if ($result === FALSE) {
+            //     echo "Error: " . $conn->error;
+            // } else {
+            //     $featuredProducts = [];
 
-            if ($result->num_rows > 0) {
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
-                $featuredProducts[] = $row;
+            // if ($result->num_rows > 0) {
+            //  output data of each row
+            // while($row = $result->fetch_assoc()) {
+            //     $featuredProducts[] = $row;
+            // }
+            //     } else {
+            //         echo "0 results";
+            //     }
+            //  $conn->close();
+            // }
+            if ($result) {
+                // Now it's safe to use $result->num_rows and other methods
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while($row = $result->fetch_assoc()) {
+                        $featuredProducts[] = $row;
+                    }
+                        } else {
+                            echo "0 results";
+                        }
+                     $conn->close();
+            } else {
+                // Query failed, handle the error
+                echo "Error: ";
             }
-                } else {
-                    echo "0 results";
-                }
-             $conn->close();
-            }
+            
         
             ?>
     
