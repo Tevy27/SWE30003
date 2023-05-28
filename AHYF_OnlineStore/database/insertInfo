@@ -10,8 +10,8 @@ INSERT INTO Accounts (shippingAddress, billingAddress, customerId) VALUES
 
 -- Products
 INSERT INTO Products (name, description, price, image) VALUES
-('Apple', 'Fresh red apple', 0.50, 'apple.jpg'),
-('Banana', 'Ripe yellow banana', 0.25, 'banana.jpg');
+('Apple', 'Fresh red apple', 0.50, 'images/apple.jpg'),
+('Banana', 'Ripe yellow banana', 0.25, 'images/banana.jpg');
 
 -- Catalogues
 INSERT INTO Catalogues (productList) VALUES
