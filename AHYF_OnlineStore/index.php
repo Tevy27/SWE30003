@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 <html>
 <head>
     <?php require 'head.php' ?>
-    <title>Home Page</title>
+    <title>Home</title>
 </head>
 <body>
     <header>
@@ -22,14 +22,12 @@ error_reporting(E_ALL);
                <div class="container">
                    <center>
                    <div id="bannerContent">
-                       <h1>Explore Our Healthy Recipe</h1>
-                       <p>30% OFF on every Delicous Dishes</p>
-                       <a href="products.php" class="btn btn-danger">Shop Now</a>
+                       <h1>Explore Our Healthy Meal</h1>
+                       <a href="product.php" class="btn btn-danger">Shop Now</a>
                    </div>
                    </center>
                </div>
            </div>
-        <h2>Featured Products</h2>
         
         <div class="product-list">
             <?php 
@@ -53,56 +51,97 @@ error_reporting(E_ALL);
             }
         
             ?>
-            <!-- <?php foreach ($featuredProducts as $product): ?>
-                <div class="product-item">
-                    <img class= "ProductImage" src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>">
-                    <h3><?php echo $product['name']; ?></h3>
-                    <p>$<?php echo number_format($product['price'], 2); ?></p>
-                    <a href="product.php?id=<?php echo $product['productId']; ?>">View Product</a>
-                </div>
-            <?php endforeach; ?> -->
+    
+
+            
 
             <div class="container">
                <div class="row">
+               <div class="col-xs-4">
+                       <div class="thumbnail">
+                       <a href="catalog.php?category=Meal">
+                               <img src="images/food.jpg" alt="Food">
+                           </a>
+                           <center>
+                               <div class="caption">
+                                   <p id="autoResize">Ready-to-Eat Meal</p>
+                                   <p>Cook Fresh, Delicous Recipes, Orgainc Ingredients</p>
+                               </div>
+                           </center>
+                       </div>
+                   </div>
+
+
+
                    <div class="col-xs-4">
                        <div  class="thumbnail">
-                           <a href="product.php">
+                       <a href="catalog.php?category=VegiesFruits">
                                 <img  src="images/vegetable.jpg" alt="Vegetables">
                            </a>
                            <center>
                                 <div class="caption">
-                                        <p id="autoResize">Vegetables</p>
-                                        <p>Fresh vegetables everyday</p>
+                                        <p id="autoResize">Vegetables & Fruits</p>
+                                        <p>Organic Vegetables</p>
                                 </div>
                            </center>
                        </div>
                    </div>
                    <div class="col-xs-4">
                        <div class="thumbnail">
-                           <a href="products.php">
+                       <a href="catalog.php?category=Meat">
                                <img src="images/meat.jpg" alt="Meat">
                            </a>
                            <center>
                                 <div class="caption">
                                     <p id="autoResize">Meat</p>
-                                    <p>Fresh meat everyday.</p>
+                                    <p>Oragnic Meat</p>
                                 </div>
                            </center>
                        </div>
                    </div>
                    <div class="col-xs-4">
                        <div class="thumbnail">
-                           <a href="products.php">
-                               <img src="images/diary.jpg" alt="Diary">
+                       <a href="catalog.php?category=Dairy">
+                               <img src="images/dairy.jpg" alt="Dairy">
                            </a>
                            <center>
                                <div class="caption">
-                                   <p id="autoResize">Diary</p>
-                                   <p>Fresh dairy product.</p>
+                                   <p id="autoResize">Dairy</p>
+                                   <p>Organic Dairy Products</p>
                                </div>
                            </center>
                        </div>
                    </div>
+
+                   <div class="col-xs-4">
+                       <div class="thumbnail">
+                       <a href="catalog.php?category=Drink">
+                               <img src="images/drinks.jpg" alt="Drinks">
+                           </a>
+                           <center>
+                               <div class="caption">
+                                   <p id="autoResize">Drinks</p>
+                                   <p>Healthy & Delicous Drinks</p>
+                               </div>
+                           </center>
+                       </div>
+                   </div>
+
+                   <div class="col-xs-4">
+                       <div class="thumbnail">
+                       <a href="catalog.php?category=Nuts">
+                               <img src="images/nuts.jpg" alt="Nuts">
+                           </a>
+                           <center>
+                               <div class="caption">
+                                   <p id="autoResize">Nuts & Seeds</p>
+                                   <p>Add our healthy nuts and seeds to your diet</p>
+                               </div>
+                           </center>
+                       </div>
+                   </div>
+                   
+                  
                </div>
            </div>
         </div>

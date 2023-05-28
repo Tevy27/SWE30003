@@ -1,0 +1,32 @@
+drop table categories;
+alter table products
+ADD categories varchar(255);
+UPDATE Products SET categories = 'VegiesFruits' WHERE name = 'Apple' or name = 'Banana';
+
+INSERT INTO Products (name, description, price, image, categories) VALUES
+('Pork', 'Organic pork', 14.99, 'images/pork.jpg', 'Meat'),
+('Beef', 'Organic beef', 18.99, 'images/beef.jpg', 'Meat'),
+('Chicken', 'Organic free range chicken', 11.99, 'images/chicken.jpg', 'Meat');
+
+INSERT INTO Products (name, description, price, image, categories) VALUES
+('Milk', 'Organic Milk', 3.99, 'images/milk.jpg', 'Dairy'),
+('Yogurt', 'Greek Yorgurt', 2.99, 'images/yogurt.jpg', 'Dairy'),
+('Cheese', 'Homemade High quality cheese', 9.99, 'images/cheese.jpg', 'Dairy');
+
+INSERT INTO Products (name, description, price, image, categories) VALUES
+('Almond', 'Roasted Almons', 10.99, 'images/almond.jpg', 'Nuts'),
+('Cashew', 'Roasted Cashew', 8.99, 'images/cahsew.jpg', 'Nuts'),
+('Macadamia', 'Roasted Macadamia', 12.99, 'images/macadamia.jpg', 'Nuts');
+
+INSERT INTO Products (name, description, price, image, categories) VALUES
+('Spanish Chicken and Bean', '', 9.99, 'images/chickenDish.jpg', 'Meal'),
+('Honey Garlic Salmon', '', 9.99, 'images/salmonDish.jpg', 'Meal'),
+('Steak Salad', '', 12.99, 'images/beefDish.jpg', 'Meal');
+
+INSERT INTO Products (name, description, price, image, categories) VALUES
+('Green Smoothie', 'For weight loss', 3.99, 'images/greenSmoothie.jpg', 'Drink'),
+('Red Smoothie', 'For healthy heart', 3.99, 'images/RedSmoothie.jpg', 'Drink');
+
+alter table products
+ADD quantity varchar(255);
+UPDATE Products SET quantity = '100';

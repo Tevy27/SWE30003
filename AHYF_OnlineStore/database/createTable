@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS Products (
     image VARCHAR(255)
 );
 
+//drop 
 CREATE TABLE IF NOT EXISTS Catalogues (
     catalogueId INT AUTO_INCREMENT PRIMARY KEY,
     productList TEXT

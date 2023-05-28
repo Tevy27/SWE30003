@@ -1,26 +1,46 @@
-<?php 
-include 'dbConnect.php';
-
-// get product id from query string
-$productId = $_GET['id'];
- 
-// fetch product details
-$sql = "SELECT * FROM products WHERE id = 1";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $productId);
-$stmt->execute();
-$result = $stmt->get_result();
-$product = $result->fetch_assoc();
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+ require 'dbConnect.php'
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Product Page</title>
+    <?php require 'head.php' ?>
+    <title>Product</title>
 </head>
 <body>
-    <h1><?php echo $product['name']; ?></h1>
-    <p><?php echo $product['description']; ?></p>
-    <p>$<?php echo $product['price']; ?></p>
+    <header>
+        
+        <?php require 'navigation.php' ?>
+    </header>
+    <div class="container">
+                <div id = "cataImg">
+    <?php
+    
+    // fetch product details
+        $sql = "SELECT * FROM products";
+        $result = $conn->query($sql);
+        
+        if ($result->num_rows > 0) {
+            // Output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo '<div class="cataProduct">';
+                echo '<strong>'.$row["name"].'</strong>'. "<br>";
+                echo '<img src="'.$row['image'].'" alt="'.$row['name'].'"><br>'. $row["description"]. " "."<br>";
+                echo "$".$row["price"]." "."<br>";
+                echo '<br><a href="add_to_cart.php?id='.'">Add to Cart</a><br><br><br>';
+                echo '</div>';
+            }
+        } else {
+            echo "No products found.";
+        }
+        $conn->close();
+        ?>
+        
+                </div>
+    </div>
 </body>
 </html>

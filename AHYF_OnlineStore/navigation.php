@@ -1,3 +1,12 @@
+<?php
+                $active_page = basename($_SERVER['PHP_SELF'], ".php");
+                function check_title ($page_title) {
+                    global $active_page;
+                    if ($page_title == $active_page) {
+                        return "class=\"active\"";
+                    }
+                }
+        ?>
 <nav class="navbar navbar-inverse navabar-fixed-top">
                <div class="container">
                    <div class="navbar-header">
@@ -6,22 +15,22 @@
                            <span class="icon-bar"></span>
                            <span class="icon-bar"></span>
                        </button>
-                       <a href="index.php" class="navbar-brand">All Your Healthy Food!</a>
+                       <h1>All Your Healthy Food!</h1>
                    </div>
                    
                    <div class="collapse navbar-collapse" id="myNavbar">
                        <ul class="nav navbar-nav navbar-right">
                            <li><a href="cart.php"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-                           <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Login</a></li>
+                           <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                        </ul>
                    </div>
 
-                   <div>
+                   <div class = "navigation">
                         <ul>
-                            <li><a href="catalog.php">Home</a></li></li>
-                            <li><a href="product.php">Products</a></li></li>
-                            <li><a href="catalog.php">Catalogues</a></li></li>
-                            <li><a href="catalog.php">Contact Us</a></li></li>
+                            <li><a <?php check_title("Home") ?> href="index.php">Home</a></li></li>
+                            <li><a <?php check_title("Product")?> href="product.php">Shop All Products</a></li></li>
+                            <!-- <li><a <?php check_title("Catalog")?> href="catalog.php">Catalogues</a></li></li> -->
+                            <li><a <?php check_title("Contact")?> href="contact.php">Contact Us</a></li></li>
                         </ul>
                    </div>
                </div>
