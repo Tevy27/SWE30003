@@ -1,7 +1,7 @@
 -- Customers
 INSERT INTO Customers (name, email, password) VALUES
-('John Doe', 'john@example.com', 'johnspassword'),
-('Jane Doe', 'jane@example.com', 'janespassword');
+('John Doe', 'john@gmail.com', 'johnspassword'),
+('Jane Doe', 'jane@gmail.com', 'janespassword');
 
 -- Accounts
 INSERT INTO Accounts (shippingAddress, billingAddress, customerId) VALUES

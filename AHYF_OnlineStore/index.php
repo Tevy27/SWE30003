@@ -33,22 +33,7 @@ error_reporting(E_ALL);
             <?php 
             $sql = "SELECT productId, name, price, image FROM products";
             $result = $conn->query($sql);
-            
-            // if ($result === FALSE) {
-            //     echo "Error: " . $conn->error;
-            // } else {
-            //     $featuredProducts = [];
-
-            // if ($result->num_rows > 0) {
-            //  output data of each row
-            // while($row = $result->fetch_assoc()) {
-            //     $featuredProducts[] = $row;
-            // }
-            //     } else {
-            //         echo "0 results";
-            //     }
-            //  $conn->close();
-            // }
+        
             if ($result) {
                 // Now it's safe to use $result->num_rows and other methods
                 if ($result->num_rows > 0) {
@@ -64,9 +49,15 @@ error_reporting(E_ALL);
                 // Query failed, handle the error
                 echo "Error: ";
             }
-            
-        
             ?>
+
+<?php
+if(isset($_SESSION['signup_success'])) {
+    echo '<script type="text/javascript">alert("' . $_SESSION['signup_success'] . '");</script>';
+    unset($_SESSION['signup_success']);
+}
+?> 
+
     
 
             
@@ -81,7 +72,7 @@ error_reporting(E_ALL);
                            <center>
                                <div class="caption">
                                    <p id="autoResize">Ready-to-Eat Meal</p>
-                                   <p>Cook Fresh, Delicous Recipes, Orgainc Ingredients</p>
+                                   <p>Fresh, Delicous, Orgainc</p>
                                </div>
                            </center>
                        </div>
