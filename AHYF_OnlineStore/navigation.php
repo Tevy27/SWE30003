@@ -21,19 +21,7 @@
                        </button>
                        <h1>All Your Healthy Food!</h1>
                    </div>
-                   
-                   <!-- <div class="collapse navbar-collapse" id="myNavbar">
-                       <ul class="nav navbar-nav navbar-right">
-                       <?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']): ?>
-                            <li><a href="cart.php"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-                            <li><a href="account.php"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-                           <li><a href="Logout.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                        <?php else: ?>
-                            <li><a href="cart.php"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-                           <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                        <?php endif; ?>
-                       </ul>
-                   </div> -->
+                
                    <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
                         <?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']): ?>
