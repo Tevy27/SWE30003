@@ -12,7 +12,7 @@ $email = mysqli_real_escape_string($conn, $email);
 $password = mysqli_real_escape_string($conn, $password);
 
 // Fetch the user from the database
-$sql = "SELECT * FROM Customers WHERE email = ? AND password = ?";
+$sql = "SELECT * FROM Accounts WHERE email = ? AND password = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $email, $password);
 $stmt->execute();
