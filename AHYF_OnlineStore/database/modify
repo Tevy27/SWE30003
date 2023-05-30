@@ -30,3 +30,41 @@ INSERT INTO Products (name, description, price, image, categories) VALUES
 alter table products
 ADD quantity varchar(255);
 UPDATE Products SET quantity = '100';
+
+SELECT * FROM store.Accounts;
+ALTER TABLE Accounts
+ADD email VARCHAR(255);
+
+UPDATE Accounts 
+SET email = (SELECT email FROM Customers WHERE Customers.customerId = Accounts.customerId);
+UPDATE Accounts 
+SET phoneNum = "0432876587" where accountId = "1" or accountId = "2";
+
+ALTER TABLE Accounts
+DROP CONSTRAINT accounts_ibfk_1;
+
+ALTER TABLE Accounts
+DROP column email;
+ALTER TABLE Accounts
+DROP column phoneNum;
+ALTER TABLE Accounts
+DROP column billingAddress;
+ALTER TABLE Accounts
+DROP column customerId;
+
+ALTER TABLE Accounts
+RENAME COLUMN shippingAddress TO address;
+ALTER TABLE Accounts
+Add name VARCHAR(255);
+ALTER TABLE Accounts
+Add email VARCHAR(255);
+ALTER TABLE Accounts
+Add phoneNumber VARCHAR(255);
+ALTER TABLE Accounts
+Add password VARCHAR(255);
+
+
+UPDATE Accounts 
+SET name = "Jane Doe", email = "jane@gmail.com", phoneNumber = "0432876587", password = "janespassword" where accountId = "2";
+UPDATE Accounts 
+SET name = "John Doe", email = "john@gmail.com", phoneNumber = "0432876587", password = "johnspassword" where accountId = "1";

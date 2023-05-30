@@ -8,6 +8,8 @@ require 'dbConnect.php';
 
 // Get POST data
 $name = $_POST['name'];
+$address = $_POST['address'];
+$phoneNumber = $_POST['phoneNumber'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 
@@ -16,14 +18,15 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo "Invalid email format";
     exit;
 }
-if (!preg_match("/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/", $password)) {
+if (!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*]{6,}$/", $password)) {
     echo "Invalid password";
+
 
     exit;
 }
 
 // Prepare SQL statement
-$sql = "INSERT INTO Customers (name, email, password ) VALUES (?, ?, ?)";
+$sql = "INSERT INTO Accounts (name,address, phoneNumber, email, password ) VALUES (?, ?, ?, ?, ?)";
 
 // Use a prepared statement to protect against SQL injection
 $stmt = $conn->prepare($sql);
@@ -33,7 +36,7 @@ if ($stmt === false) {
     exit;
 }
 
-$stmt->bind_param("sss", $name, $email, $password);
+$stmt->bind_param("sssss", $name, $address, $phoneNumber, $email, $password);
 
 // Execute the statement
 if ($stmt->execute()) {
