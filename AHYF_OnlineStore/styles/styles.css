@@ -14,10 +14,32 @@ h1{
         vertical-align: top;
         text-align: center; /* Center the text */
 }
+#infoVerify {
+    border: none; /* Remove borders */
+    color: white; /* Add a text color */
+    padding: 14px 28px; /* Add some padding */
+    background-color: #2196F3;
+    width: 50%;
+    text-align: center;
+    justify-content: space-between;
+    margin-left: 25%;
+}
+#cartEmpty{
+    border: none; /* Remove borders */
+    color: white; /* Add a text color */
+    padding: 14px 28px; /* Add some padding */
+    background-color: #2196F3;
+    text-align: center;
+    justify-content: space-between;
+    margin: 20px;
+
+}
+
 
 .quantity-input {
         width: 30px;
 }
+
 .accInfo {
     /* display:inline-block; */
     /* text-align: center; */
@@ -32,7 +54,8 @@ pre {
 #totalPrice {
    text-align: right;
    padding-right: 10%;
-   font-size: 1.2em;
+   font-size: 1.4em;
+   margin-top: 20px;
 }
 
 .ProductImage {
@@ -176,4 +199,17 @@ footer{
  .cf:after {
      clear: both;
  }
- 
+ .form-group {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+ }
+ .form-group label {
+    text-align:start;
+    margin-right: 30px;
+}
+.form-group input {
+    width: 75%; 
+    padding: 10px;
+}

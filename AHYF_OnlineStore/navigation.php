@@ -40,7 +40,7 @@
                    <div class = "navigation">
                         <ul>
                             <li><a <?php check_title("Home") ?> href="index.php">Home</a></li></li>
-                            <li><a <?php check_title("Product")?> href="product.php">Shop All Products</a></li></li>
+                            <li><a <?php check_title("Product")?> href="product.php">Browse Catalogues</a></li></li>
                             <!-- <li><a <?php check_title("Catalog")?> href="catalog.php">Catalogues</a></li></li> -->
                             <li><a <?php check_title("Contact")?> href="contact.php">Contact Us</a></li></li>
                         </ul>

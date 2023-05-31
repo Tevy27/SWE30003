@@ -51,8 +51,19 @@ error_reporting(E_ALL);
                             echo '<div class="cataProduct">';
                             echo '<strong>'.$row["name"].'</strong>'. "<br>";
                             echo '<img src="'.$row['image'].'" alt="'.$row['name'].'"><br>'. $row["description"]. " "."<br>";
-                            echo "$".$row["price"]." ".'per kg'."<br>";
-                            echo '<br><a href="add_to_cart.php?id='.'">Add to Cart</a><br>';
+                            echo "$".$row["price"]." "."<br>";
+                            echo '
+                            <button onclick="decreaseQuantity(\''.$row["productId"].'\')">-</button>
+                            <input type="hidden" id="quantity_'.$row["productId"].'" value="1" class="quantity-input">
+                            <button onclick="increaseQuantity(\''.$row["productId"].'\')">+</button>
+                            <form action="cart.php" method="post" id="form_'.$row["productId"].'">
+                                <input type="hidden" name="productId" value="'.$row["productId"].'">
+                                <input type="text" id="productQuantity_'.$row["productId"].'" name="quantity" value="1">
+                                <input type="hidden" name="action" value="add">
+                                <input type="submit" value="Add to Cart">
+                            </form>
+                            ';
+
                             echo '</div>';
                         }
                     } else {
@@ -61,5 +72,26 @@ error_reporting(E_ALL);
                     $conn->close();
                     echo '</div></div>';
                 ?>
+    <script>
+    function decreaseQuantity(productId) {
+        var quantityInput = document.getElementById('quantity_'+productId);
+        var quantity = Number(quantityInput.value);
+        if (quantity > 1) {
+          quantityInput.value = quantity - 1;
+          document.getElementById('productQuantity_'+productId).value = quantity - 1;
+        }
+    }
+    
+    function increaseQuantity(productId) {
+        var quantityInput = document.getElementById('quantity_'+productId);
+        var quantity = Number(quantityInput.value);
+        quantityInput.value = quantity + 1;
+        document.getElementById('productQuantity_'+productId).value = quantity + 1;
+    }
+    
+    function addToCart(productId) {
+        document.getElementById('form_'+productId).submit();
+    }
+    </script>
 </body>
 </html>

@@ -28,6 +28,7 @@ $totalPrice = 0.0;
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
             // Get product ID and quantity from POST data
             $productId = $_POST['productId'];
+            $quantity = $_POST['quantity'];
             $action = $_POST['action'];
         
             if ($action == 'add') {
@@ -37,21 +38,24 @@ $totalPrice = 0.0;
                 } else {
                     $_SESSION['cart'][$productId] = 1;
                 }
+                
             } elseif ($action == 'remove') {
                 // Only try to decrease the quantity or remove the product if it's in the cart
                 if (isset($_SESSION['cart'][$productId])) {
-                    $_SESSION['cart'][$productId]--;
-                    if ($_SESSION['cart'][$productId] <= 0) {
-                        unset($_SESSION['cart'][$productId]);
+                    if ($_SESSION['cart'][$productId] > 1) {
+                        // Decrement only if quantity is more than 1
+                        $_SESSION['cart'][$productId]--;
                     }
                 }
+            } elseif ($action == 'delete') {
+                unset($_SESSION['cart'][$productId]);
             }
             header("Location: " . $_SERVER['PHP_SELF']);
             exit;
         }   
 
         // Display cart items
-        echo '<table style="width:100%; border: 1px solid black;">';
+        echo '<table style="width:96%; border: 1px solid black; margin: 20px;">';
         echo '<tr><th>Product Name</th><th>Description</th><th>Quantity</th><th>Retail Price</th><th>Sub-Total</th><th>Action</th></tr>';
         if (!empty($_SESSION['cart'])) {
             foreach ($_SESSION['cart'] as $productId => $quantity) {
@@ -76,22 +80,32 @@ $totalPrice = 0.0;
                     echo '<td>';
                     echo '<form action="cart.php" method="post">';
                     echo '<input type="hidden" name="productId" value="' . $productId . '">';
-                    echo '<button type="hidden" name="action" value="add">+</button>';
-                    echo '<button type="hidden" name="action" value="remove">-</button>';
+                    echo '<input type="hidden" name="quantity" value="' . $quantity . '">';
+                    echo '<button type="submit" name="action" value="add">+</button>';
+                    echo '<button type="submit" name="action" value="remove">-</button>';
+                    echo '<button type="submit" name="action" value="delete">Remove</button>';
                     echo '</form>';
-                    echo '</td>';  // Close the Actions column
+
+                        echo '</td>';
+
                     echo '</tr>';  // Close the table row
 
                 }
+                
             }
                 } else {
-                    echo '<tr><td colspan="4">Cart is empty.</td></tr>';
+                    echo '<p id="cartEmpty"> Your Cart is empty!</p>';
                 }
                 echo '</table>';
 
-        echo "<p id='totalPrice'><strong>Total Price: \${$totalPrice}</strong></p>";
-    ?><br><br><br><br><br>
-           
+        echo "<p id='totalPrice'><strong>Total Price:&nbsp&nbsp&nbsp&nbsp&nbsp \${$totalPrice}</strong></p>";
+    
+    ?>
+    <br><br><br>
+
+    <a href="checkOut.php"class="btn btn-primary" style="float: right; margin-left: 50px;margin-right: 20px;">Check Out &gt;&gt;</a>
+      <a href="product.php" class="btn btn-primary" style="float: right;">&lt;&lt; Back to Shopping</a>
+       <br><br><br><br><br>   
 </body>
 <footer>
     <?php require 'footer.php'?>
