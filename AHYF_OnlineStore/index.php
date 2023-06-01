@@ -31,7 +31,7 @@ error_reporting(E_ALL);
         
         <div class="product-list">
             <?php 
-            $sql = "SELECT productId, name, price, image FROM products";
+            $sql = "SELECT productId, name, price, image FROM Products";
             $result = $conn->query($sql);
         
             if ($result) {
