@@ -2,7 +2,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
- require 'dbConnect.php';
+require 'dbConnect.php';
 
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -11,23 +11,42 @@ $password = $_POST['password'];
 $email = mysqli_real_escape_string($conn, $email);
 $password = mysqli_real_escape_string($conn, $password);
 
-// Fetch the user from the database
-$sql = "SELECT * FROM Accounts WHERE email = ? AND password = ?";
+// Fetch the user from the Managers database
+$sql = "SELECT * FROM Managers WHERE email = ? AND password = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $email, $password);
 $stmt->execute();
 $result = $stmt->get_result();
-$Customers = $result->fetch_assoc();
+$manager = $result->fetch_assoc();
 
-// Check if user exists
-if ($Customers) {
+if ($manager) {
+    // Manager found
     session_start();
     $_SESSION['loggedin'] = true;
     $_SESSION['email'] = $email;
-    header("location: index.php");
+    $_SESSION['role'] = 'manager'; // set role to manager
+    header("location: managerPortal.php"); // Redirect to manager portal
 } else {
-    // echo "Incorrect email or password.";
-    header('location: login.php?login_error=true');
+    // Manager not found, check in Customers database
+    $sql = "SELECT * FROM Accounts WHERE email = ? AND password = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $email, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $customer = $result->fetch_assoc();
+
+    if ($customer) {
+        // Customer found
+        session_start();
+        $_SESSION['loggedin'] = true;
+        $_SESSION['email'] = $email;
+        $_SESSION['role'] = 'customer'; // set role to customer
+        header("location: index.php"); // Redirect to customer portal
+    } else {
+        // Neither customer nor manager found
+        header('location: login.php?login_error=true');
+    }
 }
 $conn->close();
 ?>
+

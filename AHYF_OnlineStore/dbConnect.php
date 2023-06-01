@@ -2,7 +2,7 @@
 // Database Connection Details
 $dbHost = 'localhost:3306';
 $dbUsername = 'root';
-$dbPassword = 'PaS5w0rD';
+$dbPassword = '';
 $dbName = 'store';
 
 // Create connection

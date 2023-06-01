@@ -12,6 +12,7 @@ $address = $_POST['address'];
 $phoneNumber = $_POST['phoneNumber'];
 $email = $_POST['email'];
 $password = $_POST['password'];
+$role = 'customer'; // Set role to 'customer' by default
 
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -26,17 +27,17 @@ if (!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*]{6,}$/", $password)) 
 }
 
 // Prepare SQL statement
-$sql = "INSERT INTO Accounts (name,address, phoneNumber, email, password ) VALUES (?, ?, ?, ?, ?)";
+$sql = "INSERT INTO Accounts (name,address, phoneNumber, email, password, role ) VALUES (?, ?, ?, ?, ?, ?)";
 
 // Use a prepared statement to protect against SQL injection
 $stmt = $conn->prepare($sql);
 
 if ($stmt === false) {
-    echo "Error: " . $conn->error;
+    echo "Error: ";
     exit;
 }
 
-$stmt->bind_param("sssss", $name, $address, $phoneNumber, $email, $password);
+$stmt->bind_param("ssssss", $name, $address, $phoneNumber, $email, $password, $role);
 
 // Execute the statement
 if ($stmt->execute()) {

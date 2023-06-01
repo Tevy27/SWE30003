@@ -33,7 +33,7 @@ error_reporting(E_ALL & ~E_NOTICE);
             exit;
         }
     } else {
-        echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+        echo "Prepare failed";
     }
     
     

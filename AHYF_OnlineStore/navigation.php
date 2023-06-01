@@ -24,15 +24,18 @@
                 
                    <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']): ?>
-                            <li><a href="cart.php"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-                            <li><a href="account.php"><span class="glyphicon glyphicon-user"></span> Account</a></li>
-                            <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-                        <?php else: ?>
-                            <li><a href="cart.php"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-                            <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']): ?>
+                    <li><a href="cart.php"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                    <li><a href="account.php"><span class="glyphicon glyphicon-user"></span> Account</a></li>
+                    <?php if($_SESSION['role'] == 'manager'): ?>
+                        <li><a href="managerPortal.php"><span class="glyphicon glyphicon-cog"></span> Manage</a></li>
+                    <?php endif; ?>
+                    <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                <?php else: ?>
+                    <li><a href="cart.php"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                    <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <?php endif; ?>
 
-                        <?php endif; ?>
                     </ul>
                 </div>
 

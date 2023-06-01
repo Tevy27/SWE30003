@@ -68,3 +68,39 @@ UPDATE Accounts
 SET name = "Jane Doe", email = "jane@gmail.com", phoneNumber = "0432876587", password = "janespassword" where accountId = "2";
 UPDATE Accounts 
 SET name = "John Doe", email = "john@gmail.com", phoneNumber = "0432876587", password = "johnspassword" where accountId = "1";
+
+CREATE TABLE managers (
+    managerId INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+Insert Into Managers (name, email, password) values ("Tevy","tevy@gmail.com","Tevy11@$@$");
+
+alter table Managers
+add role Varchar(255);
+
+update managers
+set role = "manager" where managerId = "1";
+
+Alter table Accounts
+Add role VARCHAR(255);
+
+update Accounts
+set role = "customer" where accountId = "1" or accountId = "2" or accountId = "3" or accountId = "4";
+
+CREATE TABLE sales (
+    salesId INT(11) AUTO_INCREMENT PRIMARY KEY,
+    productId INT(11) NOT NULL,
+    quantity INT(11) NOT NULL,
+    saleDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    totalPrice DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (productId) REFERENCES products(productId)
+);
+INSERT INTO sales (productId, quantity, totalPrice) VALUES (1, 2, 19.99);
+INSERT INTO sales (productId, quantity, totalPrice) VALUES (2, 3, 20.99);
+INSERT INTO sales (productId, quantity, totalPrice) VALUES (7, 4, 12.99);
+INSERT INTO sales (productId, quantity, totalPrice) VALUES (8, 1, 10.99);
+INSERT INTO sales (productId, quantity, totalPrice) VALUES (9, 5, 29.99);
+INSERT INTO sales (productId, quantity, totalPrice) VALUES (10, 6, 15.99);
