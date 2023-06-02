@@ -5,6 +5,13 @@ error_reporting(E_ALL);
  require 'dbConnect.php'
 ?>
 
+<?php
+if(isset($_SESSION['signup_success'])) {
+    echo '<script type="text/javascript">alert("' . $_SESSION['signup_success'] . '");</script>';
+    unset($_SESSION['signup_success']);
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,12 +58,7 @@ error_reporting(E_ALL);
             }
             ?>
 
-<?php
-if(isset($_SESSION['signup_success'])) {
-    echo '<script type="text/javascript">alert("' . $_SESSION['signup_success'] . '");</script>';
-    unset($_SESSION['signup_success']);
-}
-?> 
+
 
     
 
