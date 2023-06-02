@@ -1,0 +1,52 @@
+-- Customers
+INSERT INTO Customers (name, email, password) VALUES
+('John Doe', 'john@gmail.com', 'johnspassword'),
+('Jane Doe', 'jane@gmail.com', 'janespassword');
+
+-- Accounts
+INSERT INTO Accounts (shippingAddress, billingAddress, customerId) VALUES
+('123 John Street', '123 John Street', 1),
+('456 Jane Avenue', '456 Jane Avenue', 2);
+
+-- Products
+INSERT INTO Products (name, description, price, image) VALUES
+('Apple', 'Fresh red apple', 0.50, 'images/apple.jpg'),
+('Banana', 'Ripe yellow banana', 0.25, 'images/banana.jpg');
+
+-- Catalogues
+INSERT INTO Catalogues (productList) VALUES
+('Apple, Banana');
+
+-- ShoppingCart
+INSERT INTO ShoppingCart (customerId) VALUES
+(1),
+(2);
+
+-- ShoppingCartItem
+INSERT INTO ShoppingCartItem (quantity, productId, cartId) VALUES
+(5, 1, 1),
+(3, 2, 2);
+
+-- Orders
+INSERT INTO Orders (orderDate, shippingDetails, paymentStatus, accountId) VALUES
+(CURRENT_DATE(), '123 John Street', 'Paid', 1),
+(CURRENT_DATE(), '456 Jane Avenue', 'Pending', 2);
+
+-- Payments
+INSERT INTO Payments (paymentMethod, transactionStatus, orderId) VALUES
+('Credit Card', 'Completed', 1),
+('Debit Card', 'Pending', 2);
+
+-- Shipping
+INSERT INTO Shipping (trackingNumber, shippingStatus, orderId) VALUES
+('TRACK123', 'Shipped', 1),
+('TRACK456', 'Processing', 2);
+
+-- SalesReports
+INSERT INTO SalesReports (reportPeriod, salesData) VALUES
+('Monthly', 'Some sales data here'),
+('Yearly', 'Some more sales data here');
+
+-- ProductManagement
+INSERT INTO ProductManagement () VALUES
+();

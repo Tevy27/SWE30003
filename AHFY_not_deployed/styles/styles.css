@@ -1,0 +1,215 @@
+h1{
+    color: white;
+}
+#cataImg img {
+    width: 200px; 
+    height: 200px;
+}
+#cataImg {
+    margin-left: 5%;
+}
+.cataProduct {
+        display: inline-block;
+        margin-right: 20px;
+        vertical-align: top;
+        text-align: center; /* Center the text */
+}
+#infoVerify {
+    border: none; /* Remove borders */
+    color: white; /* Add a text color */
+    padding: 14px 28px; /* Add some padding */
+    background-color: #2196F3;
+    width: 50%;
+    text-align: center;
+    justify-content: space-between;
+    margin-left: 25%;
+}
+#cartEmpty{
+    border: none; /* Remove borders */
+    color: white; /* Add a text color */
+    padding: 14px 28px; /* Add some padding */
+    background-color: #2196F3;
+    text-align: center;
+    justify-content: space-between;
+    margin: 20px;
+
+}
+
+
+.quantity-input {
+        width: 30px;
+}
+
+.accInfo {
+    /* display:inline-block; */
+    /* text-align: center; */
+    /* background-color: #c6c5c5; */
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+pre {
+    font-size: 16px;
+    padding-top: 10%;
+  }
+#totalPrice {
+   text-align: right;
+   padding-right: 10%;
+   font-size: 1.4em;
+   margin-top: 20px;
+}
+
+.ProductImage {
+    width: 10%;
+    height: auto;
+}
+.featureImage {
+    width: 10%;
+    height: auto;
+}
+#bannerImage{
+    padding-top:75px;
+    padding-bottom:50px;
+    margin-bottom: 20px;
+    text-align:center;
+    color:#f8f8f8;
+    background:url(../images/banner.jpg);
+    background-size:cover;
+}
+.navigation {
+    /* background-color: #333; */
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+.navigation ul {
+    list-style-type: none;
+    margin-top: 40px;
+    padding: 0;
+}
+
+.navigation li {
+    float: left;
+}
+
+.navigation li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.navigation li a:hover {
+    background-color: #111;
+    color: #ff6347
+}
+.active{
+    background-color: red;
+}
+.error-message {
+    color: white;
+    background-color: #ff6666;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+footer{
+    background-color:#101010;
+    color:#9d9d9d;
+    font-size:14px;
+    font-weight:bold;
+    padding:10px;    
+    bottom:0;
+}
+
+@media (min-width:320px){
+    #autoResize{
+        font-size:12px;
+    }
+}
+@media (min-width:481px){
+    #autoResize{
+        font-size:16px;
+    }
+}
+@media (min-width:641px){
+    #autoResize{
+        font-size:18px;
+    }
+}
+@media (min-width:961px){
+    #autoResize{
+        font-size:20px;
+    }
+}
+@media (min-width:1000px){
+    #autoResize{
+        font-size:26px;
+    }
+}
+#contactHeader {
+    text-align: center;
+    color: black;
+}
+ 
+ form {
+    max-width: 600px;
+    text-align: center;
+    margin: 20px auto;
+ }
+   
+   input, textarea {
+      /* outline:0; */
+      padding: 1em;
+      display: block;
+      width: 100%;
+      margin-top: 2em;
+      margin-bottom: 2em;
+      font-family: 'Merriweather', sans-serif;
+      resize: none;
+      border: 1px solid black;
+
+   }
+   
+   #input-submit {
+      color: white; 
+      background: red;
+      cursor: pointer;
+    
+   }
+   
+   textarea {
+       height: 126px;
+   }
+ 
+ 
+ /* Clearfix */
+ .cf:before,
+ .cf:after {
+     content: " "; /* 1 */
+     display: table; /* 2 */
+ }
+ 
+ .cf:after {
+     clear: both;
+ }
+ .form-group {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+ }
+ .form-group label {
+    text-align:start;
+    margin-right: 30px;
+}
+.form-group input {
+    width: 75%; 
+    padding: 10px;
+}
