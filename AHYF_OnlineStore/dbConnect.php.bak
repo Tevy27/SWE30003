@@ -1,9 +1,9 @@
 <?php
 // Database Connection Details
-$dbHost = 'localhost';
-$dbUsername = 'id20850068_admin';
-$dbPassword = 'Crutch%31Sword';
-$dbName = 'id20850068_swe30003';
+$dbHost = 'localhost:3306';
+$dbUsername = 'root';
+$dbPassword = '';
+$dbName = 'store';
 
 // Create connection
 $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
