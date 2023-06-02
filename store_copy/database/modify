@@ -1,0 +1,106 @@
+drop table categories;
+alter table products
+ADD categories varchar(255);
+UPDATE Products SET categories = 'VegiesFruits' WHERE name = 'Apple' or name = 'Banana';
+
+INSERT INTO Products (name, description, price, image, categories) VALUES
+('Pork', 'Organic pork', 14.99, 'images/pork.jpg', 'Meat'),
+('Beef', 'Organic beef', 18.99, 'images/beef.jpg', 'Meat'),
+('Chicken', 'Organic free range chicken', 11.99, 'images/chicken.jpg', 'Meat');
+
+INSERT INTO Products (name, description, price, image, categories) VALUES
+('Milk', 'Organic Milk', 3.99, 'images/milk.jpg', 'Dairy'),
+('Yogurt', 'Greek Yorgurt', 2.99, 'images/yogurt.jpg', 'Dairy'),
+('Cheese', 'Homemade High quality cheese', 9.99, 'images/cheese.jpg', 'Dairy');
+
+INSERT INTO Products (name, description, price, image, categories) VALUES
+('Almond', 'Roasted Almons', 10.99, 'images/almond.jpg', 'Nuts'),
+('Cashew', 'Roasted Cashew', 8.99, 'images/cahsew.jpg', 'Nuts'),
+('Macadamia', 'Roasted Macadamia', 12.99, 'images/macadamia.jpg', 'Nuts');
+
+INSERT INTO Products (name, description, price, image, categories) VALUES
+('Spanish Chicken and Bean', '', 9.99, 'images/chickenDish.jpg', 'Meal'),
+('Honey Garlic Salmon', '', 9.99, 'images/salmonDish.jpg', 'Meal'),
+('Steak Salad', '', 12.99, 'images/beefDish.jpg', 'Meal');
+
+INSERT INTO Products (name, description, price, image, categories) VALUES
+('Green Smoothie', 'For weight loss', 3.99, 'images/greenSmoothie.jpg', 'Drink'),
+('Red Smoothie', 'For healthy heart', 3.99, 'images/RedSmoothie.jpg', 'Drink');
+
+alter table products
+ADD quantity varchar(255);
+UPDATE Products SET quantity = '100';
+
+SELECT * FROM store.Accounts;
+ALTER TABLE Accounts
+ADD email VARCHAR(255);
+
+UPDATE Accounts 
+SET email = (SELECT email FROM Customers WHERE Customers.customerId = Accounts.customerId);
+UPDATE Accounts 
+SET phoneNum = "0432876587" where accountId = "1" or accountId = "2";
+
+ALTER TABLE Accounts
+DROP CONSTRAINT accounts_ibfk_1;
+
+ALTER TABLE Accounts
+DROP column email;
+ALTER TABLE Accounts
+DROP column phoneNum;
+ALTER TABLE Accounts
+DROP column billingAddress;
+ALTER TABLE Accounts
+DROP column customerId;
+
+ALTER TABLE Accounts
+RENAME COLUMN shippingAddress TO address;
+ALTER TABLE Accounts
+Add name VARCHAR(255);
+ALTER TABLE Accounts
+Add email VARCHAR(255);
+ALTER TABLE Accounts
+Add phoneNumber VARCHAR(255);
+ALTER TABLE Accounts
+Add password VARCHAR(255);
+
+
+UPDATE Accounts 
+SET name = "Jane Doe", email = "jane@gmail.com", phoneNumber = "0432876587", password = "janespassword" where accountId = "2";
+UPDATE Accounts 
+SET name = "John Doe", email = "john@gmail.com", phoneNumber = "0432876587", password = "johnspassword" where accountId = "1";
+
+CREATE TABLE managers (
+    managerId INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+Insert Into Managers (name, email, password) values ("Tevy","tevy@gmail.com","Tevy11@$@$");
+
+alter table Managers
+add role Varchar(255);
+
+update managers
+set role = "manager" where managerId = "1";
+
+Alter table Accounts
+Add role VARCHAR(255);
+
+update Accounts
+set role = "customer" where accountId = "1" or accountId = "2" or accountId = "3" or accountId = "4";
+
+CREATE TABLE sales (
+    salesId INT(11) AUTO_INCREMENT PRIMARY KEY,
+    productId INT(11) NOT NULL,
+    quantity INT(11) NOT NULL,
+    saleDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    totalPrice DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (productId) REFERENCES products(productId)
+);
+INSERT INTO sales (productId, quantity, totalPrice) VALUES (1, 2, 19.99);
+INSERT INTO sales (productId, quantity, totalPrice) VALUES (2, 3, 20.99);
+INSERT INTO sales (productId, quantity, totalPrice) VALUES (7, 4, 12.99);
+INSERT INTO sales (productId, quantity, totalPrice) VALUES (8, 1, 10.99);
+INSERT INTO sales (productId, quantity, totalPrice) VALUES (9, 5, 29.99);
+INSERT INTO sales (productId, quantity, totalPrice) VALUES (10, 6, 15.99);
