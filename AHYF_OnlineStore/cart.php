@@ -17,11 +17,10 @@ $totalPrice = 0.0;
     <?php require 'head.php' ?>
     <title>Cart</title>
 </head>
+<header>
+    <?php require 'navigation.php' ?>
+</header>
 <body>
-    <header>
-        
-        <?php require 'navigation.php' ?>
-    </header>
     <h1 id = "contactHeader">Your Cart</h1><br><br>
     <?php 
         // In cart.php
@@ -50,8 +49,6 @@ $totalPrice = 0.0;
             } elseif ($action == 'delete') {
                 unset($_SESSION['cart'][$productId]);
             }
-            header("Location: " . $_SERVER['PHP_SELF']);
-            exit;
         }   
 
         // Display cart items

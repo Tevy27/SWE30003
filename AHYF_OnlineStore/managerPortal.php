@@ -2,6 +2,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL& ~E_NOTICE);
+
 session_start();
 
 // Check if user is logged in and is a manager
@@ -9,85 +10,84 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['role'] != 'manager') {
     header("Location: login.php");
     exit;
 }
+else {
+    require 'dbConnect.php';
 
-require 'dbConnect.php';
-
-$editProduct = null;
+    $editProduct = null;
 
 // Check if a product is being edited
-if (isset($_SESSION['editProductId'])) {
-    $stmt = $conn->prepare("SELECT * FROM products WHERE productId = ?");
-    $stmt->bind_param("i", $_SESSION['editProductId']);
-    $stmt->execute();
-    $editProduct = $stmt->get_result()->fetch_assoc();
-}
+    if (isset($_SESSION['editProductId'])) {
+        $stmt = $conn->prepare("SELECT * FROM products WHERE productId = ?");
+        $stmt->bind_param("i", $_SESSION['editProductId']);
+        $stmt->execute();
+        $editProduct = $stmt->get_result()->fetch_assoc();
+    }
 
 // Handle form submissions
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['addProduct'])) {
-        // Add a new product
-        $stmt = $conn->prepare("INSERT INTO products (name, description, price, quantity, categories, image) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssddss", $_POST['name'], $_POST['description'], $_POST['price'], $_POST['quantity'], $_POST['categories'], $_POST['image']);
-        if ($stmt->execute()) {
-            echo "New product has been added successfully";
-        } else {
-            echo "Error add new product: " . $stmt->error;
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST['addProduct'])) {
+            // Add a new product
+            $stmt = $conn->prepare("INSERT INTO products (name, description, price, quantity, categories, image) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssddss", $_POST['name'], $_POST['description'], $_POST['price'], $_POST['quantity'], $_POST['categories'], $_POST['image']);
+            if ($stmt->execute()) {
+                echo "New product has been added successfully";
+            } else {
+                echo "Error add new product: " . $stmt->error;
+            }
         }
-    }
-    elseif (isset($_POST['deleteProduct'])) {
-        // Delete a product
-        $stmt = $conn->prepare("DELETE FROM products WHERE productId = ?");
-        $stmt->bind_param("i", $_POST['productId']);
-        $stmt->execute();
-    } 
-    elseif (isset($_POST['exportSalesToCSV'])) {
-        // Export products to CSV
-        $result = $conn->query("SELECT * FROM sales");
-        $fp = fopen('/tmp/sales.csv', 'w');
-    
-        if ($fp === false) {
-            echo "Error: Unable to open file for writing.";
-            exit;
-        }
-        // write the column headers
-        fputcsv($fp, array('salesId', 'productId', 'quantity', 'saleDate', 'totalPrice'));
-    
-        while ($row = $result->fetch_assoc()) {
-            fputcsv($fp, $row);
-        }
-        fclose($fp);
-        echo "Sales data exported successfully to sales.csv";
-    }
-    elseif (isset($_POST['editProduct'])) {
-        $_SESSION['editProductId'] = $_POST['productId'];
-    }
-    // Update button was clicked
-    elseif (isset($_POST['updateProduct'])) {
-        // Update an existing product
-        $stmt = $conn->prepare("UPDATE products SET name = ?, description = ?, price = ?, quantity=?, categories=?, image =? WHERE productId = ?");
-        $stmt->bind_param("ssddssi", $_POST['name'], $_POST['description'], $_POST['price'], $_POST['quantity'], $_POST['categories'], $_POST['image'], $_SESSION['editProductId']);
-        $stmt->execute();
-        
-        // Clear the edit state
-        unset($_SESSION['editProductId']);
-
-        // Refresh the edit product data
-        if (isset($_SESSION['editProductId'])) {
-            $stmt = $conn->prepare("SELECT * FROM products WHERE productId = ?");
-            $stmt->bind_param("i", $_SESSION['editProductId']);
+        elseif (isset($_POST['deleteProduct'])) {
+            // Delete a product
+            $stmt = $conn->prepare("DELETE FROM products WHERE productId = ?");
+            $stmt->bind_param("i", $_POST['productId']);
             $stmt->execute();
-            $editProduct = $stmt->get_result()->fetch_assoc();
         }
+        elseif (isset($_POST['exportSalesToCSV'])) {
+            // Export products to CSV
+            $result = $conn->query("SELECT * FROM sales");
+            $fp = fopen('/tmp/sales.csv', 'w');
+
+            if ($fp === false) {
+                echo "Error: Unable to open file for writing.";
+                exit;
+            }
+            // write the column headers
+            fputcsv($fp, array('salesId', 'productId', 'quantity', 'saleDate', 'totalPrice'));
+
+            while ($row = $result->fetch_assoc()) {
+                fputcsv($fp, $row);
+            }
+            fclose($fp);
+            echo "Sales data exported successfully to sales.csv";
+        }
+        elseif (isset($_POST['editProduct'])) {
+            $_SESSION['editProductId'] = $_POST['productId'];
+        }
+        // Update button was clicked
+        elseif (isset($_POST['updateProduct'])) {
+            // Update an existing product
+            $stmt = $conn->prepare("UPDATE products SET name = ?, description = ?, price = ?, quantity=?, categories=?, image =? WHERE productId = ?");
+            $stmt->bind_param("ssddssi", $_POST['name'], $_POST['description'], $_POST['price'], $_POST['quantity'], $_POST['categories'], $_POST['image'], $_SESSION['editProductId']);
+            $stmt->execute();
+
+            // Clear the edit state
+            unset($_SESSION['editProductId']);
+
+            // Refresh the edit product data
+            if (isset($_SESSION['editProductId'])) {
+                $stmt = $conn->prepare("SELECT * FROM products WHERE productId = ?");
+                $stmt->bind_param("i", $_SESSION['editProductId']);
+                $stmt->execute();
+                $editProduct = $stmt->get_result()->fetch_assoc();
+            }
+        }
+        // Redirect to the same page to avoid form resubmission issues
+        echo "<script>location.href='managerPortal.php';</script>";
+        exit;
     }
-    // Redirect to the same page to avoid form resubmission issues
-    header("Location: managerPortal.php");
-    exit;
-
-
+    // Get all products
+    $result = $conn->query("SELECT * FROM products");
 }
 
-// Get all products
-$result = $conn->query("SELECT * FROM products");
 ?>
 <!DOCTYPE html>
 <html>

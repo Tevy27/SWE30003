@@ -52,9 +52,6 @@ if(isset($_SESSION['signup_success'])) {
                             echo "0 results";
                         }
                      $conn->close();
-            } else {
-                // Query failed, handle the error
-                echo "Error: ";
             }
             ?>
 

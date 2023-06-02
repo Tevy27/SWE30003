@@ -4,15 +4,48 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL & ~E_NOTICE);
 require 'dbConnect.php';
-   
-session_start();
-
 
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
     // Redirect the user to login page
     header('location: login.php');
     exit;
     }
+
+session_start();
+
+// Fetch user data
+$stmt = $conn->prepare("SELECT name, email, address, phoneNumber
+        FROM Accounts WHERE email = ?");
+$stmt->bind_param("s", $_SESSION['email']);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $Accounts = $result->fetch_assoc();
+} else {
+    die("Couldn't get user data");
+}
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // You should add server-side form validation here
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $address = $_POST['address'];
+    $phoneNumber = $_POST['phoneNumber'];
+
+
+
+    // Process the order, e.g., insert into database
+
+    // Clear the cart
+    $_SESSION['cart'] = array();
+    header('Location: payment.php');
+    exit;
+
+    // echo "Order placed. Thank you for shopping with us!";
+} else {
+// Display checkout form
 ?>
 
 <!DOCTYPE html>
@@ -28,41 +61,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
     </header>
     <h1 id = "contactHeader">Check Out</h1><br><br>
     <p id = "infoVerify">Verify your information before placing order</p>
-    <?php
-    // Fetch user data
-        $stmt = $conn->prepare("SELECT name, email, address, phoneNumber
-        FROM accounts WHERE email = ?");
-        $stmt->bind_param("s", $_SESSION['email']);
-        $stmt->execute();
-        $result = $stmt->get_result();
 
-        if ($result->num_rows > 0) {
-            $Accounts = $result->fetch_assoc();
-        } else {
-            die("Couldn't get user data");
-        } 
-        
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // You should add server-side form validation here
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $address = $_POST['address'];
-        $phoneNumber = $_POST['phoneNumber'];
-        
-
-        
-        // Process the order, e.g., insert into database
-    
-        // Clear the cart
-        $_SESSION['cart'] = array();
-        header('Location: payment.php');
-            exit;
-    
-        // echo "Order placed. Thank you for shopping with us!";
-    } else {
-        // Display checkout form
-        ?>
             <form action="checkOut.php" method="post">
             <div class="form-group">
                 <label for="name">Name</label>

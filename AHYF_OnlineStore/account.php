@@ -2,29 +2,25 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL & ~E_NOTICE);
- require 'dbConnect.php'
-?>
-    <?php
-    session_start();
+require 'dbConnect.php';
+
+session_start();
 
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         header('location: login.php');
         exit;
     }
 
-    // Establish a connection to the database
-    require 'dbConnect.php';
-    
     // Query to fetch user details
     $sql = "SELECT name, email, address, phoneNumber
-    FROM accounts WHERE email = ?";
+    FROM Accounts WHERE email = ?";
 
     
     // Prepare the statement
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("s", $_SESSION['email']);
         $stmt->execute();
-        
+
         $result = $stmt->get_result();
         if($result->num_rows > 0) {
             $Accounts = $result->fetch_assoc();
@@ -45,7 +41,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 <html>
 <head>
     <?php require 'head.php' ?>
-    <title>Acount</title>
+    <title>Account</title>
 </head>
 <body>
     <header>
@@ -64,11 +60,11 @@ error_reporting(E_ALL & ~E_NOTICE);
             </pre>
         </p>
     </div>
-    
+
 
 
     </header>
-    
+
     <footer>
         <?php require 'footer.php'?>
     </footer>

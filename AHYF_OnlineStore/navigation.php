@@ -1,16 +1,12 @@
 <?php
-    session_start();
-?>
-<?php
-                $active_page = basename($_SERVER['PHP_SELF'], ".php");
-                function check_title ($page_title) {
-                    global $active_page;
-                    if ($page_title == $active_page) {
-                        return "class=\"active\"";
-                    }
-                }
+$active_page = basename($_SERVER['PHP_SELF'], ".php");
+function check_title ($page_title) {
+    global $active_page;
+    if ($page_title == $active_page) {
+        return "class=\"active\"";
+    }
+}
         ?>
-    
 <nav class="navbar navbar-inverse navabar-fixed-top">
                <div class="container">
                    <div class="navbar-header">
